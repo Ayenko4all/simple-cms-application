@@ -46,8 +46,8 @@
 
                                     </div>
                                     <div class="form-group col-md-4">
-                                        <h5 class="text-muted">Date of Birth</h5>
-                                        <p>{{findClient.date_of_birth | ago}}</p>
+                                        <h5 class="text-muted">Registration Date</h5>
+                                        <p>{{findClient.created_at | ago}}</p>
                                     </div>
                                 </div>
                                 <div class="form-row">
