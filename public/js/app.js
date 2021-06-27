@@ -1963,6 +1963,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: 'registration',
   data: function data() {
@@ -1973,20 +1974,16 @@ __webpack_require__.r(__webpack_exports__);
       email: '',
       date_of_birth: '',
       legal_counsel: '',
-      case_file: '',
+      case_detail: '',
       profile_image: '',
       errors: [],
       file: ''
     };
   },
   methods: {
-    handleCaseFileUpload: function handleCaseFileUpload() {
-      this.case_file = this.$refs.case_file.files;
-      this.RegistrationError.case_file = false;
-    },
     handleProfileImageUpload: function handleProfileImageUpload() {
       this.profile_image = this.$refs.profile_image.files;
-      this.RegistrationError.profile_image = false;
+      this.errors.case_detail = null;
     },
     registration: function registration() {
       var _this = this;
@@ -1997,10 +1994,7 @@ __webpack_require__.r(__webpack_exports__);
       bodyFormData.append('date_of_birth', this.date_of_birth);
       bodyFormData.append('email', this.email);
       bodyFormData.append('legal_counsel', this.legal_counsel);
-
-      if (this.case_file.length > 0) {
-        bodyFormData.append('case_file', this.case_file[0], this.case_file[0].name);
-      }
+      bodyFormData.append('case_detail', this.case_detail);
 
       if (this.profile_image.length > 0) {
         bodyFormData.append('profile_image', this.profile_image[0], this.profile_image[0].name);
@@ -2173,9 +2167,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
 /* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_0__);
-//
-//
-//
 //
 //
 //
@@ -61065,28 +61056,39 @@ var render = function() {
                 ),
                 _vm._v(" "),
                 _c("div", { staticClass: "form-row" }, [
-                  _c("div", { staticClass: "form-group col-md-6" }, [
+                  _c("div", { staticClass: "form-group col-md-8" }, [
                     _c("label", { attrs: { for: "caseFile" } }, [
-                      _vm._v("Upload Case File")
+                      _vm._v("Case Detail")
                     ]),
                     _vm._v(" "),
-                    _c("input", {
-                      ref: "case_file",
-                      staticClass: "form-control-file",
-                      attrs: { type: "file", id: "case_file" },
+                    _c("textarea", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.case_detail,
+                          expression: "case_detail"
+                        }
+                      ],
+                      staticClass: "form-control",
+                      attrs: { id: "case_detail" },
+                      domProps: { value: _vm.case_detail },
                       on: {
-                        change: function($event) {
-                          return _vm.handleCaseFileUpload()
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.case_detail = $event.target.value
                         }
                       }
                     }),
                     _vm._v(" "),
-                    _vm.errors.case_file
-                      ? _c("span", [_vm._v(_vm._s(_vm.errors.case_file[0]))])
+                    _vm.errors.case_detail
+                      ? _c("span", [_vm._v(_vm._s(_vm.errors.case_detail[0]))])
                       : _vm._e()
                   ]),
                   _vm._v(" "),
-                  _c("div", { staticClass: "form-group col-md-6" }, [
+                  _c("div", { staticClass: "form-group col-md-4" }, [
                     _c("label", { attrs: { for: "profileImage" } }, [
                       _vm._v("Profile Image")
                     ]),
@@ -61212,7 +61214,7 @@ var render = function() {
       ])
     ]),
     _vm._v(" "),
-    _vm.filterData.data || _vm.clients.data
+    _vm.clients.data.length > 0 || _vm.filterData.data
       ? _c("div", [
           _vm.filterData.data
             ? _c(
@@ -61221,7 +61223,7 @@ var render = function() {
                 _vm._l(_vm.filterData.data, function(filterClient) {
                   return _c(
                     "div",
-                    { key: filterClient.id, staticClass: "col-sm-4 mb-4" },
+                    { key: filterClient.id, staticClass: "col-sm-3 mb-4" },
                     [
                       _c("div", { staticClass: "card p-3" }, [
                         _c("div", { staticClass: "card-body" }, [
@@ -61316,7 +61318,7 @@ var render = function() {
                     "div",
                     { key: client.id, staticClass: "col-sm-4 mb-4" },
                     [
-                      _c("div", { staticClass: "card p-3" }, [
+                      _c("div", { staticClass: "card p-4" }, [
                         _c("div", { staticClass: "card-body" }, [
                           _c("div", { staticClass: " image-holder mb-2" }, [
                             client.profile_image
@@ -61344,13 +61346,13 @@ var render = function() {
                           _vm._v(" "),
                           _c("div", { staticClass: "row d-flex" }, [
                             _c(
-                              "span",
+                              "small",
                               { staticClass: "align-self-start text-muted h5" },
                               [_vm._v("Joined Date ")]
                             ),
                             _vm._v(" "),
                             _c(
-                              "p",
+                              "small",
                               { staticClass: "justify-content-end ml-auto" },
                               [_vm._v(_vm._s(_vm._f("ago")(client.created_at)))]
                             )
@@ -61358,7 +61360,7 @@ var render = function() {
                           _vm._v(" "),
                           _c("div", { staticClass: "row d-flex" }, [
                             _c(
-                              "span",
+                              "small",
                               { staticClass: "align-self-start text-muted h5" },
                               [_vm._v("Email ")]
                             ),
@@ -61531,36 +61533,22 @@ var render = function() {
                   _vm._v(" "),
                   _c("div", { staticClass: "form-group col-md-4" }, [
                     _c("h5", { staticClass: "text-muted" }, [
-                      _vm._v("Date of Birth")
+                      _vm._v("Registration Date")
                     ]),
                     _vm._v(" "),
                     _c("p", [
-                      _vm._v(
-                        _vm._s(_vm._f("ago")(_vm.findClient.date_of_birth))
-                      )
+                      _vm._v(_vm._s(_vm._f("ago")(_vm.findClient.created_at)))
                     ])
                   ])
                 ]),
                 _vm._v(" "),
                 _c("div", { staticClass: "form-row" }, [
-                  _c("div", { staticClass: "form-group col-md-4" }, [
+                  _c("div", { staticClass: "form-group col-md-12" }, [
                     _c("h5", { staticClass: "text-muted" }, [
-                      _vm._v("Case File")
+                      _vm._v("Case Detail")
                     ]),
                     _vm._v(" "),
-                    _c("div", { staticClass: " case-image-holder mb-2" }, [
-                      _vm.findClient.case_file
-                        ? _c("img", {
-                            attrs: {
-                              src: "/storage/" + _vm.findClient.case_file
-                            }
-                          })
-                        : _c("img", {
-                            attrs: {
-                              src: "../../images/blank-profile-picture.png"
-                            }
-                          })
-                    ])
+                    _c("p", [_vm._v(_vm._s(_vm.findClient.case_detail))])
                   ])
                 ])
               ])

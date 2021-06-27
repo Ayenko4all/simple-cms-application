@@ -51,12 +51,9 @@
                                     </div>
                                 </div>
                                 <div class="form-row">
-                                    <div class="form-group col-md-4">
-                                        <h5 class="text-muted">Case File</h5>
-                                        <div class=" case-image-holder mb-2">
-                                            <img :src="'/storage/' + findClient.case_file"  v-if="findClient.case_file"/>
-                                            <img :src="'../../images/blank-profile-picture.png'" v-else>
-                                        </div>
+                                    <div class="form-group col-md-12">
+                                        <h5 class="text-muted">Case Detail</h5>
+                                        <p>{{findClient.case_detail}}</p>
                                     </div>
                                 </div>
                             </div>

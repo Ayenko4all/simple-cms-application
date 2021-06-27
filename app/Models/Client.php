@@ -17,7 +17,7 @@ class Client extends Model
         'email',
         'date_of_birth',
         'legal_counsel',
-        'case_file',
+        'case_detail',
         'profile_image',
         'date_profiled'
     ];

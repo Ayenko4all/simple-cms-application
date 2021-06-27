@@ -15,7 +15,7 @@ class ClientController extends Controller
      * Display a listing of the resource.
      *
      * @param Request $request
-     * @return \Illuminate\Http\JsonResponse
+     * @return \Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response
      */
     public function index(Request $request)
     {
@@ -24,18 +24,10 @@ class ClientController extends Controller
                     ->Orwhere('email', 'LIKE', '%'. $term . '%');
             })->latest()->paginate(3);
 
-        return response()->json($clients);
+           return  $clients->toArray();
+
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
 
     /**
      * Store a newly created resource in storage.
@@ -54,7 +46,7 @@ class ClientController extends Controller
            'email'          => ['required','string','email','unique:clients,email'],
            'date_of_birth'  => ['required','date'],
            'legal_counsel'  => ['required','string'],
-           'case_file'      => ['image', 'max:5242880','required'],
+           'case_detail'      => ['required', 'string','min:100'],
            'profile_image' => ['nullable','max:5242880','image',
                function ($attribute, $value, $fail) {
                    if (filled($value)) {
@@ -68,10 +60,7 @@ class ClientController extends Controller
                },],
        ]);
 
-
-        $fileOne = $request->file('case_file');
         $fileTwo =  $request->file('profile_image');
-        $caseFilePath = $fileOne->store('case_files');
 
         $profileImagePath = $request->hasFile('profile_image') ? $fileTwo->store('profileImages') : '';
 
@@ -82,11 +71,12 @@ class ClientController extends Controller
             'date_of_birth'  => $request->input('date_of_birth'),
             'legal_counsel'  => $request->input('legal_counsel'),
             'date_profiled'  => now(),
-            'case_file'      => $caseFilePath,
+            'case_detail'      => $request->input('case_detail'),
             'profile_image'  => $profileImagePath
         ]);
         $client->notify(new clientRegistrationNotification($client));
-        return response()->json($client,200);
+        return json_decode($client, true);
+
 
     }
 
@@ -99,40 +89,7 @@ class ClientController extends Controller
     public function show($id)
     {
         $client = Client::where('id', $id)->firstOrFail();
-        return response()->json($client);
+        return json_decode($client, true);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
 }

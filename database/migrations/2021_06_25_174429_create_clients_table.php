@@ -19,7 +19,7 @@ class CreateClientsTable extends Migration
             $table->string('last_name');
             $table->string('email');
             $table->string('legal_counsel');
-            $table->string('case_file');
+            $table->text('case_detail');
             $table->string('profile_image')->nullable();
             $table->timestamp('date_of_birth')->nullable();
             $table->timestamp('date_profiled')->nullable();

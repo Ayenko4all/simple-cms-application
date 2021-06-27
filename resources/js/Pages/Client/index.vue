@@ -12,9 +12,9 @@
           </div>
 
       </div>
-        <div v-if="filterData.data || clients.data">
+        <div v-if="clients.data.length > 0 || filterData.data">
             <div class="row mt-2" v-if="filterData.data">
-                <div class="col-sm-4 mb-4" v-for="filterClient in filterData.data" :key="filterClient.id">
+                <div class="col-sm-3 mb-4" v-for="filterClient in filterData.data" :key="filterClient.id">
                     <div class="card p-3">
                         <div class="card-body">
                             <div class=" image-holder mb-2">
@@ -41,7 +41,7 @@
 
             <div class="row mt-2" v-else>
                 <div class="col-sm-4 mb-4" v-for="client in clients.data" :key="client.id">
-                    <div class="card p-3">
+                    <div class="card p-4">
                         <div class="card-body">
                             <div class=" image-holder mb-2">
                                 <img :src="`/storage/` + client.profile_image"  v-if="client.profile_image"/>
@@ -49,11 +49,11 @@
                             </div>
                             <h5 class="card-title text-center"> {{ client.first_name }} {{ client.last_name }}</h5>
                             <div class="row d-flex">
-                                <span class="align-self-start text-muted h5">Joined Date </span>
-                                <p class="justify-content-end ml-auto">{{client.created_at | ago }}</p>
+                                <small class="align-self-start text-muted h5">Joined Date </small>
+                                <small class="justify-content-end ml-auto">{{client.created_at | ago }}</small>
                             </div>
                             <div class="row d-flex">
-                                <span class="align-self-start text-muted h5">Email </span>
+                                <small class="align-self-start text-muted h5">Email </small>
                                 <p class="justify-content-end ml-auto">{{ client.email }}</p>
                             </div>
                             <div>

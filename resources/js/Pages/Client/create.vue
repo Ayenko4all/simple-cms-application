@@ -54,12 +54,13 @@
                              <span v-if="errors.legal_counsel">{{ errors.legal_counsel[0] }}</span>
                          </div>
                         <div class="form-row">
-                            <div class="form-group col-md-6">
-                                <label for="caseFile">Upload Case File</label>
-                                <input type="file" class="form-control-file" id="case_file" ref="case_file" @change="handleCaseFileUpload()" >
-                                <span v-if="errors.case_file">{{ errors.case_file[0] }}</span>
+                            <div class="form-group col-md-8">
+                                <label for="caseFile">Case Detail</label>
+                                <textarea class="form-control" id="case_detail" v-model="case_detail">
+                                </textarea>
+                                <span v-if="errors.case_detail">{{ errors.case_detail[0] }}</span>
                             </div>
-                            <div class="form-group col-md-6" >
+                            <div class="form-group col-md-4" >
                                 <label for="profileImage">Profile Image</label>
                                 <input type="file"  class="form-control-file" id="profile_image" ref="profile_image" @change="handleProfileImageUpload()" >
                                 <span v-if="errors.profile_image">{{ errors.profile_image[0] }}</span>
@@ -92,7 +93,7 @@
                 email: '',
                 date_of_birth: '',
                 legal_counsel:'',
-                case_file: '',
+                case_detail: '',
                 profile_image: '',
                 errors: [],
                 file: ''
@@ -100,14 +101,9 @@
         },
 
         methods: {
-            handleCaseFileUpload(){
-                this.case_file = this.$refs.case_file.files;
-                this.RegistrationError.case_file = false
-
-            },
             handleProfileImageUpload(){
                 this.profile_image = this.$refs.profile_image.files;
-                this.RegistrationError.profile_image = false;
+              this.errors.case_detail = null;
             },
 
 
@@ -118,9 +114,7 @@
                 bodyFormData.append('date_of_birth', this.date_of_birth);
                 bodyFormData.append('email', this.email);
                 bodyFormData.append('legal_counsel', this.legal_counsel);
-                if (this.case_file.length > 0) {
-                    bodyFormData.append('case_file',this.case_file[0],this.case_file[0].name);
-                }
+                bodyFormData.append('case_detail',this.case_detail);
                 if (this.profile_image.length > 0){
                     bodyFormData.append('profile_image',this.profile_image[0],this.profile_image[0].name);
                 }
