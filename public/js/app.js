@@ -61214,7 +61214,7 @@ var render = function() {
       ])
     ]),
     _vm._v(" "),
-    _vm.clients.data.length > 0 || _vm.filterData.data
+    _vm.clients.data != "" || _vm.filterData.data
       ? _c("div", [
           _vm.filterData.data
             ? _c(
