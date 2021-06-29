@@ -14,7 +14,7 @@ Clone the project from github repo
 -   Install composer packages using `composer install`.
 -   Migrate the database using `php artisan migrate`.
 -    Run `npm install` to install noodle_module
--   Compiles and hot-reloads for development run `npm run serve`
+-   Compiles and hot-reloads for development run `npm run dev`
 -   Start Php's inbuilt server using php artisan serve.
 
 ## Controllers
