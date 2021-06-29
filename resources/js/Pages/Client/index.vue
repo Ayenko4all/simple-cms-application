@@ -14,7 +14,7 @@
       </div>
         <div v-if="clients.data  !=  ''  || filterData.data">
             <div class="row mt-2" v-if="filterData.data">
-                <div class="col-sm-3 mb-4" v-for="filterClient in filterData.data" :key="filterClient.id">
+                <div class="col-sm-4 mb-4" v-for="filterClient in filterData.data" :key="filterClient.id">
                     <div class="card p-3">
                         <div class="card-body">
                             <div class=" image-holder mb-2">

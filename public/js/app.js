@@ -60802,7 +60802,7 @@ var render = function() {
           [
             _c(
               "router-link",
-              { staticClass: "btn btn-primary", attrs: { to: "/", tag: "li" } },
+              { staticClass: "btn btn-primary", attrs: { to: "/" } },
               [_vm._v("\n                  Back to dashboard\n              ")]
             )
           ],
@@ -61177,7 +61177,7 @@ var render = function() {
             "router-link",
             {
               staticClass: "btn btn-primary mb-3 text-white",
-              attrs: { to: "/registration", tag: "li" }
+              attrs: { to: "/registration" }
             },
             [_vm._v("\n              Add Client\n          ")]
           )
@@ -61223,7 +61223,7 @@ var render = function() {
                 _vm._l(_vm.filterData.data, function(filterClient) {
                   return _c(
                     "div",
-                    { key: filterClient.id, staticClass: "col-sm-3 mb-4" },
+                    { key: filterClient.id, staticClass: "col-sm-4 mb-4" },
                     [
                       _c("div", { staticClass: "card p-3" }, [
                         _c("div", { staticClass: "card-body" }, [
