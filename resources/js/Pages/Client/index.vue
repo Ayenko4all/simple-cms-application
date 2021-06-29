@@ -2,7 +2,7 @@
     <div class="container">
       <div class="row mt-5 mb-3">
           <div class="text-left addClientBtn col-md-8">
-              <router-link to="/registration" tag="li" class="btn btn-primary mb-3 text-white">
+              <router-link to="/registration" class="btn btn-primary mb-3 text-white">
                   Add Client
               </router-link>
           </div>

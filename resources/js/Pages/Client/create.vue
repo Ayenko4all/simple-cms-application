@@ -4,7 +4,7 @@
         <div class="row">
           <div  class="center col-md-8">
               <div class=" mb-3 mt-5 addClientBtn">
-                  <router-link to="/" tag="li" class="btn btn-primary">
+                  <router-link to="/"  class="btn btn-primary">
                       Back to dashboard
                   </router-link>
               </div>
